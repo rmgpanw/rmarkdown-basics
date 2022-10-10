@@ -1,0 +1,40 @@
+---
+title: "Home"
+author: "Anon"
+date: "2022-10-10"
+output: 
+  html_document:
+    code_folding: "hide"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Contents
+
+```{r results='asis'}
+# use chunk option 'results="asis"' to programmatically generate a table of contents
+
+# all files in root directory
+all_files <- list.files()
+  
+# subset ending with 'html', 'docx' or 'pdf'
+selected_files <- subset(x = all_files,
+                         subset = grepl(pattern = "html$|docx$|pdf$",
+                                        x = all_files))
+
+# ...but excluding this home page
+selected_files <- subset(selected_files,
+                         selected_files != "index.html")
+
+# print bullet point hyperlinks using cat() function
+paste0("\n- [",
+      selected_files,
+      "](",
+      selected_files,
+      ")\n") |>
+  paste(collapse = "") |>
+  cat()
+```
+
